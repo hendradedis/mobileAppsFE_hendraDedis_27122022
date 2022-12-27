@@ -24,6 +24,8 @@ import {IMAGES} from '../../utils/images';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {IUserData} from '../SignUp/components/FormSignUp';
+import {useSetRecoilState} from 'recoil';
+import {dataUserAtom} from '../../recoils/user';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
 
@@ -39,11 +41,9 @@ const LoginScreen = (): React.ReactElement => {
   const [wholeUserData, setWholeUserData] = React.useState<IUserData[]>([]);
 
   const onSubmitLogin = async () => {
-    console.log('wholeUserData', wholeUserData);
     const dataPersit = wholeUserData.find(
       x => x.password === userData.password && x.username === userData.username,
     );
-    console.log('persis', dataPersit);
     if (dataPersit) {
       await AsyncStorage.setItem(USER_DATA_HOME, JSON.stringify(dataPersit));
       navigation.navigate('home');

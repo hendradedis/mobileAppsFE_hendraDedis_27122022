@@ -1,1 +1,1 @@
-export const DATA_SAMPLE = 'DATA_SAMPLE';
+export const DATA_USER = 'DATA_USER';

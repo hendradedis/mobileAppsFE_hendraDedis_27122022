@@ -23,16 +23,30 @@ const SignUpScreen = (): React.ReactElement => {
   const [userData, setUserData] = React.useState<IUserData>(defaultValue);
   const [wholeUserData, setWholeUserData] = React.useState<IUserData[]>([]);
 
-  const onUserDataFilled = (user: IUserData, canRegister: boolean) => {
+  const onUserDataFilled = (user: IUserData, passWordTrue: boolean) => {
+    let checkEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    let checkPass = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+
+    if (checkEmail.test(user?.username) === true) {
+      if (
+        user?.password.length > 8 &&
+        user?.password.match(checkPass) &&
+        passWordTrue
+      ) {
+        setIsButtonActive(true);
+      } else {
+        setIsButtonActive(false);
+      }
+    } else {
+      setIsButtonActive(false);
+    }
     setUserData(user);
-    setIsButtonActive(canRegister);
   };
 
   const onPressSignUp = () => {
     const userDatas = wholeUserData;
 
     userDatas.push(userData);
-    console.log('usedatas', userDatas);
     AsyncStorage.setItem(USER_DATA, JSON.stringify(userDatas));
     navigation.navigate('login');
   };
@@ -57,8 +71,8 @@ const SignUpScreen = (): React.ReactElement => {
               <Image style={styles.imageStyles} source={IMAGES.image.ICONWOM} />
             </Layouts>
             <FormSignUp
-              onAllowedToRegister={(user, canRegister) =>
-                onUserDataFilled(user, canRegister)
+              onAllowedToRegister={(user, passWordTrue) =>
+                onUserDataFilled(user, passWordTrue)
               }
             />
           </KeyboardAvoidingView>

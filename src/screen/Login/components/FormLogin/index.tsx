@@ -15,15 +15,16 @@ interface IFormSignIn {
   onUserData: (user: IUserData) => void;
 }
 
+const defaultValue = {
+  password: '',
+  username: '',
+};
+
 const FormLogin = ({onUserData}: IFormSignIn): React.ReactElement => {
   const [password, setPassword] = React.useState(true);
-  const [userData, setUserData] = React.useState<IUserData>({
-    password: '',
-    username: '',
-  });
+  const [userData, setUserData] = React.useState<IUserData>(defaultValue);
 
   React.useEffect(() => {
-    console.log('user', userData);
     onUserData(userData);
   }, [userData]);
 
@@ -33,6 +34,7 @@ const FormLogin = ({onUserData}: IFormSignIn): React.ReactElement => {
         <Text style={styles.emailText}>{USERNAME}</Text>
         <TextInput
           placeholder={PLACEHOLDERUSER}
+          value={userData.username}
           style={styles.inputStyleEmail}
           onChangeText={text =>
             setUserData({
@@ -53,6 +55,7 @@ const FormLogin = ({onUserData}: IFormSignIn): React.ReactElement => {
                   password: text,
                 })
               }
+              value={userData.password}
               secureTextEntry={password}
               placeholder="********"
             />
