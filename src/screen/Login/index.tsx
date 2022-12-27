@@ -24,8 +24,6 @@ import {IMAGES} from '../../utils/images';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {IUserData} from '../SignUp/components/FormSignUp';
-import {useSetRecoilState} from 'recoil';
-import {dataUserAtom} from '../../recoils/user';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
 

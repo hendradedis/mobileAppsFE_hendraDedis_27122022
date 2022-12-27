@@ -10,6 +10,7 @@ import {LOGOUT, USER_DATA_HOME} from '../../constants/user.const';
 import {IMAGES} from '../../utils/images';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {IUserData} from '../SignUp/components/FormSignUp';
+import LinearGradient from 'react-native-linear-gradient';
 
 const defaultValue: IUserData = {
   password: '',
@@ -72,10 +73,14 @@ const HomeScreen = (): React.ReactElement => {
               {`Password : ${wholeUserData?.password}`}{' '}
             </Text>
           </Layouts>
-          <TouchableOpacity
-            onPress={() => logout()}
-            style={styles.buttonLogout}>
-            <Text style={styles.textLogout}>{LOGOUT}</Text>
+          <TouchableOpacity onPress={() => logout()}>
+            <LinearGradient
+              start={{x: 0, y: 0}}
+              end={{x: 1, y: 1}}
+              colors={['#0a6eb1', '#074d7c', '#053759', '#032135']}
+              style={styles.buttonLogout}>
+              <Text style={styles.textLogout}>{LOGOUT}</Text>
+            </LinearGradient>
           </TouchableOpacity>
         </Layouts>
       </BackgroundImages>
