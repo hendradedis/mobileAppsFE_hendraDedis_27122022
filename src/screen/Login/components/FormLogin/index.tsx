@@ -34,6 +34,7 @@ const FormLogin = ({onUserData}: IFormSignIn): React.ReactElement => {
         <Text style={styles.emailText}>{USERNAME}</Text>
         <TextInput
           placeholder={PLACEHOLDERUSER}
+          maxLength={50}
           value={userData.username}
           style={styles.inputStyleEmail}
           onChangeText={text =>
@@ -56,6 +57,7 @@ const FormLogin = ({onUserData}: IFormSignIn): React.ReactElement => {
                 })
               }
               value={userData.password}
+              maxLength={50}
               secureTextEntry={password}
               placeholder="********"
             />

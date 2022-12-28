@@ -13,7 +13,6 @@ interface IStyles {
 
 const styles = StyleSheet.create<IStyles>({
   container: {
-    flex: 1,
     height: '100%',
   },
   contentBox: {

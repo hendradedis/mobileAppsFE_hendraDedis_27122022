@@ -2,7 +2,6 @@
 import * as React from 'react';
 import {Text, TextInput, TouchableOpacity} from 'react-native';
 import Layouts from '../../../../components/layouts';
-import {moderateScale} from 'react-native-size-matters';
 import styles from './styles';
 import {
   MUSTEMAIL,
@@ -40,7 +39,7 @@ const FormSignUp = ({onAllowedToRegister}: IFormSignUp): React.ReactElement => {
 
   return (
     <Layouts style={styles.containerBox}>
-      <Layouts style={{marginBottom: moderateScale(16)}}>
+      <Layouts>
         <Text style={styles.emailText}>{USERNAME}</Text>
         <TextInput
           maxLength={50}
@@ -83,9 +82,7 @@ const FormSignUp = ({onAllowedToRegister}: IFormSignUp): React.ReactElement => {
         </Layouts>
         <Text style={styles.textWarning}>{VALIDATEPASS}</Text>
         <Layouts>
-          <Text style={[styles.passText, {marginTop: moderateScale(10)}]}>
-            {ReTYPE}
-          </Text>
+          <Text style={styles.passText}>{ReTYPE}</Text>
           <Layouts style={styles.inputRetype}>
             <Layouts style={styles.inputBox}>
               <TextInput

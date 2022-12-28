@@ -19,13 +19,12 @@ const isIos = Platform.OS === 'ios';
 
 const styles = StyleSheet.create<IStyles>({
   container: {
-    flex: 1,
-    height: '100%',
+    height: '90%',
   },
   containerBox: {
     padding: moderateScale(8),
     justifyContent: 'center',
-    paddingHorizontal: moderateScale(20, 0.25),
+    paddingHorizontal: moderateScale(16, 0.25),
     marginHorizontal: moderateScale(20),
     borderRadius: moderateScale(8),
   },

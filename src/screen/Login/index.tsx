@@ -6,6 +6,7 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
   Text,
   TouchableOpacity,
 } from 'react-native';
@@ -25,7 +26,7 @@ import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {IUserData} from '../SignUp/components/FormSignUp';
 
-const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
+const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 20;
 
 const defaultValue: IUserData = {
   password: '',
@@ -47,7 +48,7 @@ const LoginScreen = (): React.ReactElement => {
       navigation.navigate('home');
       setUserData(defaultValue);
     } else {
-      Alert.alert('Maaf , silahkan cek username dan passsword anda');
+      Alert.alert('Your username and password are not correct');
     }
   };
 
@@ -88,8 +89,11 @@ const LoginScreen = (): React.ReactElement => {
   return (
     <Layouts style={styles.container}>
       <BackgroundImages style={GlobalStyle.styles.globalHeight}>
-        <Layouts style={styles.containerBox}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.containerBox}>
           <KeyboardAvoidingView
+            enabled
             behavior="position"
             keyboardVerticalOffset={keyboardVerticalOffset}>
             <Layouts style={styles.imageContainer}>
@@ -104,7 +108,7 @@ const LoginScreen = (): React.ReactElement => {
             isActiveButton={isButtonActive}
             onPress={onSubmitLogin}
           />
-        </Layouts>
+        </ScrollView>
       </BackgroundImages>
     </Layouts>
   );

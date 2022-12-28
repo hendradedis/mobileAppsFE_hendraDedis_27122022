@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Image, KeyboardAvoidingView, Platform} from 'react-native';
+import {Image, KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
 import Layouts from '../../components/layouts';
 import styles from './styles';
 import BackgroundImages from '../../components/backgroundImages';
@@ -63,7 +63,9 @@ const SignUpScreen = (): React.ReactElement => {
   return (
     <Layouts style={styles.container}>
       <BackgroundImages style={GlobalStyle.styles.globalHeight}>
-        <Layouts style={styles.containerBox}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.containerBox}>
           <KeyboardAvoidingView
             behavior="padding"
             keyboardVerticalOffset={keyboardVerticalOffset}>
@@ -80,7 +82,7 @@ const SignUpScreen = (): React.ReactElement => {
             isActiveButton={isButtonActive}
             onPress={onPressSignUp}
           />
-        </Layouts>
+        </ScrollView>
       </BackgroundImages>
     </Layouts>
   );
