@@ -81,7 +81,7 @@ const FormSignUp = ({onAllowedToRegister}: IFormSignUp): React.ReactElement => {
           </TouchableOpacity>
         </Layouts>
         <Text style={styles.textWarning}>{VALIDATEPASS}</Text>
-        <Layouts>
+        <Layouts style={styles.boxRetype}>
           <Text style={styles.passText}>{ReTYPE}</Text>
           <Layouts style={styles.inputRetype}>
             <Layouts style={styles.inputBox}>

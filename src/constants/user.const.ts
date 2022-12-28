@@ -7,10 +7,12 @@ export const USERNAME = 'Username';
 export const PASSWORD = 'Password';
 export const ReTYPE = 'Re type password';
 export const MUSTEMAIL = 'must email active';
+export const SUCCESSFULLY = 'successfully logged in';
 export const MUSTSAME = 'password must be the same';
 export const PLACEHOLDERUSER = 'eg : hendradedis@gmail.com';
+export const NOTMATCH = 'username and password not match';
 export const VALIDATEPASS =
-  'password greater than 8 in total and uppercase, lowercase and numbers';
+  'must be 8 characters , uppercase, lowercase and numbers';
 
 // asyncStorage
 export const USER_DATA = 'USER_DATA';

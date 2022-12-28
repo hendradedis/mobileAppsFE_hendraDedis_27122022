@@ -1,29 +1,49 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import * as React from 'react';
 import Layouts from '../../components/layouts';
 import styles from './styles';
 import BackgroundImages from '../../components/backgroundImages';
 import GlobalStyle from '../../components/globalstyle/styles';
-import {Alert, BackHandler, Image, Text, TouchableOpacity} from 'react-native';
+import {
+  Alert,
+  BackHandler,
+  Image,
+  Platform,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import {useNavigation} from '@react-navigation/native';
-import {LOGOUT, USER_DATA_HOME} from '../../constants/user.const';
+import {LOGOUT, SUCCESSFULLY, USER_DATA_HOME} from '../../constants/user.const';
 import {IMAGES} from '../../utils/images';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {IUserData} from '../SignUp/components/FormSignUp';
 import LinearGradient from 'react-native-linear-gradient';
+import {useToast} from 'react-native-toast-notifications';
 
 const defaultValue: IUserData = {
   password: '',
   username: '',
 };
-
+const isIos = Platform.OS === 'ios';
 const HomeScreen = (): React.ReactElement => {
+  const toast = useToast();
   const navigation = useNavigation<any>();
   const [wholeUserData, setWholeUserData] =
     React.useState<IUserData>(defaultValue);
 
+  const showToast = () => {
+    toast.show(SUCCESSFULLY, {
+      type: 'success',
+      placement: isIos ? 'bottom' : 'top',
+      duration: 4000,
+      animationType: 'slide-in',
+      dangerColor: 'red',
+    });
+  };
+
   const alertButtonWarning = (): void =>
-    Alert.alert('Pemberitahuan', 'Apakah anda yakin ingin keluar', [
+    Alert.alert('Notice', 'Are you sure you want to exit ?', [
       {
         text: 'Cancel',
         onPress: () => {},
@@ -55,6 +75,7 @@ const HomeScreen = (): React.ReactElement => {
       if (persistedUserData) {
         setWholeUserData(JSON.parse(persistedUserData));
       }
+      showToast();
     })();
   }, []);
   return (

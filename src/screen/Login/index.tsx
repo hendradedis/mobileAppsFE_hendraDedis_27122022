@@ -18,6 +18,7 @@ import FormLogin from './components/FormLogin';
 import ButtonAction from './components/ButtonAction';
 import {
   FORGET_PASS,
+  NOTMATCH,
   USER_DATA,
   USER_DATA_HOME,
 } from '../../constants/user.const';
@@ -25,6 +26,7 @@ import {IMAGES} from '../../utils/images';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {IUserData} from '../SignUp/components/FormSignUp';
+import {useToast} from 'react-native-toast-notifications';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 20;
 
@@ -34,6 +36,7 @@ const defaultValue: IUserData = {
 };
 
 const LoginScreen = (): React.ReactElement => {
+  const toast = useToast();
   const navigation = useNavigation<any>();
   const [isButtonActive, setIsButtonActive] = React.useState(false);
   const [userData, setUserData] = React.useState<IUserData>(defaultValue);
@@ -48,12 +51,23 @@ const LoginScreen = (): React.ReactElement => {
       navigation.navigate('home');
       setUserData(defaultValue);
     } else {
-      Alert.alert('Your username and password are not correct');
+      onDataUserSignin(defaultValue);
+      toast.show(NOTMATCH, {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 4000,
+        animationType: 'slide-in',
+        dangerColor: 'red',
+      });
     }
   };
 
   const onDataUserSignin = (user: IUserData) => {
-    setUserData(user);
+    if (user.password === '' && user.username === '') {
+      setUserData({username: '', password: ''});
+    } else {
+      setUserData(user);
+    }
   };
 
   const onBackPress = () => {
@@ -61,7 +75,7 @@ const LoginScreen = (): React.ReactElement => {
   };
 
   React.useEffect(() => {
-    if (userData.username && userData.password) {
+    if (userData?.username && userData?.password) {
       setIsButtonActive(true);
     } else {
       setIsButtonActive(false);

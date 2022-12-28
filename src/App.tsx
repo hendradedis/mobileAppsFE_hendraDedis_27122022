@@ -14,17 +14,20 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {RecoilRoot} from 'recoil';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import RootNavigation from './navigator/RootNavigation';
+import {ToastProvider} from 'react-native-toast-notifications';
 
 const App = (): React.ReactElement => {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot override={false}>
-        <SafeAreaProvider>
-          <NavigationContainer>
-            <RootNavigation />
-          </NavigationContainer>
-        </SafeAreaProvider>
+        <ToastProvider>
+          <SafeAreaProvider>
+            <NavigationContainer>
+              <RootNavigation />
+            </NavigationContainer>
+          </SafeAreaProvider>
+        </ToastProvider>
       </RecoilRoot>
     </QueryClientProvider>
   );

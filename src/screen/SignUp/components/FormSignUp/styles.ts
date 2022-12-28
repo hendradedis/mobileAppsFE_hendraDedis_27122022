@@ -14,6 +14,7 @@ interface IStyles {
   inputBox: ViewStyle;
   inputRetype: ViewStyle;
   textWarning: TextStyle;
+  boxRetype: ViewStyle;
 }
 const isIos = Platform.OS === 'ios';
 
@@ -114,7 +115,10 @@ const styles = StyleSheet.create<IStyles>({
     fontSize: moderateScale(10),
     paddingTop: moderateScale(10),
     textAlign: 'right',
-    color: '#c4c4c4',
+    color: '#074d7c',
+  },
+  boxRetype: {
+    marginTop: moderateScale(8),
   },
 });
 

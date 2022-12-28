@@ -10,24 +10,29 @@ import {
 } from '../../../../constants/user.const';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {IUserData} from '../../../SignUp/components/FormSignUp';
+import {useIsFocused} from '@react-navigation/native';
 
 interface IFormSignIn {
   onUserData: (user: IUserData) => void;
 }
 
-const defaultValue = {
-  password: '',
-  username: '',
-};
-
 const FormLogin = ({onUserData}: IFormSignIn): React.ReactElement => {
+  const isFocused = useIsFocused();
   const [password, setPassword] = React.useState(true);
-  const [userData, setUserData] = React.useState<IUserData>(defaultValue);
+  const [userData, setUserData] = React.useState<IUserData>({
+    password: '',
+    username: '',
+  });
 
   React.useEffect(() => {
     onUserData(userData);
   }, [userData]);
 
+  React.useEffect(() => {
+    if (!isFocused) {
+      setUserData({username: '', password: ''});
+    }
+  }, [isFocused]);
   return (
     <Layouts style={styles.containerBox}>
       <Layouts style={styles.contentBox}>
